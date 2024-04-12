@@ -10,11 +10,10 @@ class Operation(object):
 
 
 class WorkflowAction(object):
-
     name = ''
     description = ''
 
-    def action(self,request,obj,node_config,operation=Operation.APPROVE):
+    def action(self, request, obj, node_config, operation=Operation.APPROVE):
         """
 
         :param request:
@@ -27,9 +26,9 @@ class WorkflowAction(object):
 class TestAction(WorkflowAction):
     name = 'action.test'
 
-    def action(self,request,obj,node_config,operation=Operation.APPROVE):
-        print 'this is a workflow test action'
-        print 'request user is %s,current node is %s'%(request.user,node_config)
+    def action(self, request, obj, node_config, operation=Operation.APPROVE):
+        print('this is a workflow test action')
+        print('request user is %s,current node is %s' % (request.user, node_config))
 
 
 class WorkflowActionManager(object):
@@ -47,8 +46,8 @@ class WorkflowActionManager(object):
             WorkflowActionManager.registed = True
 
     @classmethod
-    def register(cls,action):
+    def register(cls, action):
         if cls.actions.get(action.name):
-            raise Exception('%s already exists,register failed'%action.name)
-        if issubclass(action,WorkflowAction):
+            raise Exception('%s already exists,register failed' % action.name)
+        if issubclass(action, WorkflowAction):
             WorkflowActionManager.actions[action.name] = action()

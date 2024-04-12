@@ -6,7 +6,7 @@ from django.http.response import HttpResponseRedirect
 from django.utils.encoding import force_text
 from django.template.response import TemplateResponse
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 
 
@@ -28,7 +28,7 @@ def pay_action(request,model,object_id):
         try:
             obj.action_pay(request)
             messages.success(request,_('action successfully'))
-        except Exception,e:
+        except Exception as e:
             messages.error(request,e)
 
         return HttpResponseRedirect("/admin/selfhelp/%s/%s"%(model,object_id))
